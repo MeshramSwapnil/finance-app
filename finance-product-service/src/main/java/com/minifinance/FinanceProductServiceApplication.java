@@ -1,0 +1,13 @@
+package com.minifinance;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class FinanceProductServiceApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(FinanceProductServiceApplication.class, args);
+	}
+
+}
