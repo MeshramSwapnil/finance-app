@@ -1,0 +1,62 @@
+
+@use "sass:string";
+
+.container {
+    width: 100%;
+    height: 100vh;
+}
+
+.login-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('/assets/images/login-background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    &::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.44);
+        width: 100%;
+        height: 100%;
+    }
+
+    * {
+        z-index: 2;
+    }
+
+    .login-card {
+        min-width: 200px;
+        width: 22%;
+        background-color: white;
+        min-height: 1px;
+        border-radius: 0.5rem;
+        transform: translateY(-20%);
+        padding: 1.25rem;
+
+        h2 {
+            font-weight: 900;
+            padding-bottom: .25rem;
+            border-bottom: 0.5rem solid var(--secondary);
+            margin-bottom: 2rem;
+        }
+    }
+
+    .login-form {
+        display: flex;
+        flex-direction: column;
+
+    }
+}
+
+
+.error {
+  color: var(--danger);
+  font-weight: bold;
+}

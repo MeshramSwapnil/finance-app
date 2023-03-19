@@ -1,0 +1,71 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  h1{
+    align-self: center;
+  }
+}
+
+
+.card {
+  all: unset;
+  position: relative;
+  border-radius: 4px;
+  border: 2px solid #eee;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+  line-height: 1.5rem;
+  box-shadow: rgb(229, 228, 226) 0px 1px 3px;
+  pointer-events: auto !important;
+  padding: 1.5rem;
+}
+
+
+input[type=checkbox] {
+  position: relative;
+	border: 2px solid var(--primary-dark);
+	border-radius: 2px;
+	background: none;
+	cursor: pointer;
+	line-height: 0;
+	margin: 0 .6em 0 0;
+	outline: 0;
+	padding: 0 !important;
+	vertical-align: text-top;
+	height: 20px;
+	width: 20px;
+	appearance: none;
+  opacity: .5;
+}
+
+input[type=checkbox]:hover {
+  opacity: 1;
+}
+
+input[type=checkbox]:checked {
+  background-color: var(--primary);
+  opacity: 1;
+}
+
+input[type=checkbox]:before {
+  content: '';
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  width: 4px;
+  height: 10px;
+  border: solid #FFF;
+  border-width: 0 2px 2px 0;
+  margin: -1px -1px 0 -1px;
+  transform: rotate(45deg) translate(-50%, -50%);
+  z-index: 2;
+}
+
+a.link {
+  color: var(--primary-dark);
+  cursor: pointer;
+}

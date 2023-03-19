@@ -1,0 +1,28 @@
+header {
+  display: flex;
+  height: 4rem;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 3px;
+  justify-content: space-between;
+
+  .logout{
+    width: 1.2rem;
+  }
+}
+
+main {
+  display: flex;
+  height: calc(100vh - 4rem);
+  background-color: white;
+  padding : 1rem;
+}
+
+@media only screen and (max-width: 720px) {
+  header{
+    align-items: center;
+  }
+  .logo {
+    height: 70%;
+  }
+}

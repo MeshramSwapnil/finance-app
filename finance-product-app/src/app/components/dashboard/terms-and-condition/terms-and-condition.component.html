@@ -1,0 +1,17 @@
+<div class="content">
+  <h1 class="align-self-start">Terms and Conditions</h1>
+  <div class="card flex">
+    <h4>YOU ACKNOWLEDGE THAT YOU HAVE READ THIS AGREEMENT AND AGREE TO ALL ITS TERMS AND CONDITIONS. YOU HAVE INDEPENDENTLY EVALUATED THE DESIRABILITY OF THE SERVICE AND ARE NOT RELYING ON ANY REPRESENTATION AGREEMENT, GUARANTEE OR STATEMENT OTHER THAN AS SET FORTH IN THIS AGREEMENT</h4>
+    <form class="flex flex-column align-self-start" [formGroup]="tncForm">
+      <div class="flex mt-2 mb-2" formArrayName="checkboxes" *ngFor="let t of checkboxes.controls;  let i = index">
+        <input id="tnc{{i}}" name="tnc{{i}}" type="checkbox" value="yes" formControlName="{{i}}">
+        <label for="tnc{{i}}"><strong>{{products[i].description}}</strong> Read the terms and condition
+        </label>&nbsp;&nbsp;
+        <a class="button btn-transparent link" (click)="downloadTnc(products[i].id)">here</a>
+      </div>
+    </form>
+    <button class="align-self-end" (click)="submitForm()">Sumbit</button>
+  </div>
+
+</div>
+

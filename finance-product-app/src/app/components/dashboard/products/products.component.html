@@ -1,0 +1,26 @@
+<div class="content">
+  <div class="flex justify-content-between">
+    <h1>What's in store for you</h1>
+    <button *ngIf="auth.roles.includes('ROLE_ADMIN')" class="button btn-transparent" (click)="goToAddProduct()"><strong> + Add Product</strong></button>
+  </div>
+  <section>
+    <div class="card-container">
+      <div class="card" [ngClass]="{'selected' : product.selected}" *ngFor="let product of products$ | async" (click)="selectCard(product)">
+        <div class="card-image">
+          <img [src]="product.imageUrl" alt="description">
+        </div>
+        <div class="card-content">
+          <p><strong>{{product.description}}</strong></p>
+        </div>
+        <div class="card-actions flex justify-content-end" *ngIf="auth.roles.includes('ROLE_ADMIN')">
+          <button class="button btn-danger delete" (click)="deleteProduct(product.id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="flex justify-content-end mt-7">
+      <button class="button ml-2" (click)="proceedToBuy()" [disabled]="selectedProducts.length == 0">Proceed</button>
+    </div>
+  </section>
+</div>

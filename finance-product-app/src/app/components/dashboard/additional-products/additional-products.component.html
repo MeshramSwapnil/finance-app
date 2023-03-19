@@ -1,0 +1,68 @@
+<div class="content">
+  <div class="flex justify-content-between">
+    <h1>Would you like to add more products</h1>
+    <button class="button btn-transparent" (click)="skipToTermsAndCondition()">Skip this step</button>
+  </div>
+  <section class="mt-7">
+    <div class="flex products-container">
+      <div class="flex flex-column product-list">
+        <div class="card p-2">
+          <div class="card-title flex flex-row align-items-center w-100 justify-content-between">
+            <h3><strong>Order your check book</strong></h3>
+            <button class="button btn-transparent" (click)="addEmptyRow()"><strong class="add">+ Add Item</strong></button>
+          </div>
+          <div class="card-content mt-3 w-100">
+            <div class="flex form-row">
+              <span class="description"><h4>Description</h4></span>
+              <span class="currency"><h4>Currency</h4></span>
+              <span class="quantity"><h4>Quantity</h4></span>
+            </div>
+            <form [formGroup]="productsForm">
+              <div class="flex flex-column" formArrayName="additionalProducts">
+                <ng-container *ngFor="let productForm of additionalProducts.controls; let i = index">
+                  <div [formGroupName]="i" class="flex form-row">
+                    <div class="description">
+                      <fpa-dropdown [data]="checkBookList" defaultTitle="Select cheque book" key="description" formControlName="rateId" value="id"></fpa-dropdown>
+                    </div>
+                    <div class="currency">
+                      <fpa-dropdown [data]="currencyList" defaultTitle="Select currency" key="currency" formControlName="currency" value="currency"></fpa-dropdown>
+                    </div>
+                    <div class="quantity">
+                      <input type="number"  class="form-control" placeholder="Quantity" name="quantity" required formControlName="quantity" id="">
+                    </div>
+                    <img src="/assets/images/close.svg" (click)="removeRow(i)" alt="" style="width: 1rem;">
+                  </div>
+
+                </ng-container>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-column product-summary">
+        <div class="summary-block">
+          <h2 class="summary-header">Summary</h2>
+          <div class="white-divider"></div>
+          <div class="flex justify-content-between pl-2 pr-2 mt-5 summary-data" *ngFor="let s of summary">
+              <span>{{s.quantity}}</span>
+              <span>{{s.description}}</span>
+              <span>{{s.total}}</span>
+          </div>
+        </div>
+        <div class="summary-total mt-5">
+          <div class="white-divider"></div>
+          <div class="flex justify-content-between">
+            <h4 class="summary-header">Total</h4>
+            <span class="total"><h4>{{total}}</h4></span>
+          </div>
+        </div>
+        <div class="flex justify-content-end mt-7">
+          <button class="button btn-block ml-2 checkoutButton" (click)="proceedToCheckout()" [disabled]="productsForm.invalid || summary.length == 0">Proceed</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+
+  </section>
+</div>

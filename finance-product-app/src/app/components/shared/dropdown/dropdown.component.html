@@ -1,0 +1,15 @@
+<div class="dropdown-container">
+  <div class="dropdown-menu" (click)="showMenuItems = !showMenuItems" [ngClass]="{'focus' : showMenuItems}">
+    <span [innerText]="selectedItem ? selectedItem[key] : defaultTitle"></span>
+    <input type="text" class="d-none" [(ngModel)]="selectedValue">
+    <span><img class="angle-down" src="assets/images/downarrow.svg" alt="" srcset=""></span>
+  </div>
+  <div class="menu-items-list" *ngIf="showMenuItems">
+    <div class="menu-item" *ngFor="let item of data" (click)="selectItem(item)">
+      <span [innerText]="item[key]"></span>
+    </div>
+    <div class="empty-dropdown-data" *ngIf="data.length == 0">No data to display.</div>
+  </div>
+
+  <div *ngIf="showMenuItems" class="top-bar-overlay" (click)="showMenuItems = false"></div>
+</div>

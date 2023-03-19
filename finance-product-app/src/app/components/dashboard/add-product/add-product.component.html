@@ -1,0 +1,54 @@
+<h2><strong>Add Product</strong></h2>
+<section class="card mt-7">
+<form [formGroup]="productForm">
+  <div class="form-container">
+    <div class="mb-3">
+      <label for="" class="form-label">Name</label>
+      <input
+        type="text"
+        name="name"
+        id="name"
+        class="form-control"
+        formControlName="name"
+        placeholder="Please enter name"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Description</label>
+      <input
+        type="text"
+        name="description"
+        id="description"
+        class="form-control"
+        formControlName="description"
+        placeholder="Please enter description"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Charge</label>
+      <input
+        type="number"
+        name="charge"
+        id="charge"
+        class="form-control"
+        formControlName="charge"
+        placeholder="Please enter charge"
+        required
+      />
+    </div>
+    <div class="mb-3">
+     <label for="" class="form-label">File</label>
+     <div class="flex align-items-center">
+        <button type="button btn-danger" onclick="document.querySelector('#InputFile').click()">Click to choose file</button>
+        <input type="file" id="InputFile" (change)="imagesPreview($event)" style="display: none;">
+        <img class="preview-image mt-5 ml-7" [src]="imageFile ? imageFile.link : ''">
+     </div>
+    </div>
+    <div class="mb-3 mt-3 flex justify-content-end">
+      <button type="submit" [disabled]="productForm.invalid || file === undefined" class="button" (click)="addProduct()">Submit</button>
+    </div>
+  </div>
+</form>
+</section>
