@@ -23,7 +23,7 @@ public class Products {
 	@Id
 	@GeneratedValue(generator="pseq", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name="pseq",sequenceName="product_seq", allocationSize=1, initialValue = 10000)
-	Long id;
+	Integer id;
 
 	@NotBlank
 	String name;
