@@ -28,14 +28,14 @@ public class CheckBookControllerTest {
 	@Test
 	@WithMockUser(username = "Swapnil")
 	public void authorisedGET() throws Exception {
-		MvcResult mvcResult = this.mockMvc.perform(get("/checkbook")).andDo(print()).andExpect(status().isOk())
+		MvcResult mvcResult = this.mockMvc.perform(get("/checkbook")).andExpect(status().isOk())
 				.andExpect(jsonPath("$.message").value("SUCCESS")).andReturn();
 		Assertions.assertEquals(MediaType.APPLICATION_JSON_VALUE, mvcResult.getResponse().getContentType());
 	}
 
 	@Test
 	public void unauthorisedGET() throws Exception {
-		this.mockMvc.perform(get("/checkbook")).andDo(print())
+		this.mockMvc.perform(get("/checkbook"))
 				.andExpect(status().isUnauthorized()).andReturn();
 	}
 }

@@ -2,7 +2,6 @@ package com.minifinance.controller;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -52,7 +51,7 @@ public class TokenControllerTest {
 		when(textEncryptor.decrypt("token")).thenReturn("token");
 		when(jwtUtil.generateToken(Mockito.any())).thenReturn("token");
 		MvcResult mvcResult = this.mockMvc.perform(get("/refreshToken").header("x-refresh-token", "token"))
-				.andDo(print())
+				
 				.andExpect(status().isOk()).andExpect(jsonPath("$.success").value(true)).andReturn();
 		Assertions.assertEquals(MediaType.APPLICATION_JSON_VALUE, mvcResult.getResponse().getContentType());
 	}
@@ -63,13 +62,12 @@ public class TokenControllerTest {
 		when(textEncryptor.decrypt("token")).thenReturn("token");
 		when(jwtUtil.generateToken(Mockito.any())).thenReturn("token");
 		this.mockMvc.perform(get("/refreshToken").header("x-refresh-token", "token"))
-				.andDo(print())
 				.andExpect(status().isUnauthorized()).andExpect(jsonPath("$.success").value(false)).andReturn();
 	}
 	
 	@Test
 	public void withoutXRefreshToken() throws Exception {
-		this.mockMvc.perform(get("/refreshToken")).andDo(print()).andExpect(status().isUnauthorized()).andReturn();
+		this.mockMvc.perform(get("/refreshToken")).andExpect(status().isUnauthorized()).andReturn();
 	}
 	
 	

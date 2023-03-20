@@ -4,7 +4,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -38,14 +37,14 @@ public class ProductsControllerTest {
 	@Test
 	@WithMockUser(username = "Swapnil")
 	public void authorisedGET() throws Exception {
-		MvcResult mvcResult = this.mockMvc.perform(get("/products")).andDo(print()).andExpect(status().isOk())
+		MvcResult mvcResult = this.mockMvc.perform(get("/products")).andExpect(status().isOk())
 				.andExpect(jsonPath("$.message").value("SUCCESS")).andReturn();
 		Assertions.assertEquals(MediaType.APPLICATION_JSON_VALUE, mvcResult.getResponse().getContentType());
 	}
 
 	@Test
 	public void unauthorisedGET() throws Exception {
-		this.mockMvc.perform(get("/products")).andDo(print()).andExpect(status().isUnauthorized()).andReturn();
+		this.mockMvc.perform(get("/products")).andExpect(status().isUnauthorized()).andReturn();
 	}
 
 	@Test
@@ -59,7 +58,7 @@ public class ProductsControllerTest {
 		MockMultipartFile file = new MockMultipartFile("file", "file.pdf", "text/plain", "some other type".getBytes());
 		MockMultipartFile data = new MockMultipartFile("data", "", "application/json",
 				mapper.writeValueAsString(products).getBytes());
-		MvcResult mvcResult = this.mockMvc.perform(multipart("/products").file(file).file(data)).andDo(print())
+		MvcResult mvcResult = this.mockMvc.perform(multipart("/products").file(file).file(data))
 				.andExpect(status().isOk()).andExpect(jsonPath("$.message").value("SUCCESS")).andReturn();
 		Assertions.assertEquals(MediaType.APPLICATION_JSON_VALUE, mvcResult.getResponse().getContentType());
 	}
@@ -75,13 +74,13 @@ public class ProductsControllerTest {
 		MockMultipartFile file = new MockMultipartFile("file", "file.pdf", "text/plain", "some other type".getBytes());
 		MockMultipartFile data = new MockMultipartFile("data", "", "application/json",
 				mapper.writeValueAsString(products).getBytes());
-		this.mockMvc.perform(multipart("/products").file(file).file(data)).andDo(print())
+		this.mockMvc.perform(multipart("/products").file(file).file(data))
 				.andExpect(status().is5xxServerError()).andReturn();
 	}
 
 	@Test
 	public void unauthorisedPOST() throws Exception {
-		this.mockMvc.perform(post("/products")).andDo(print()).andExpect(status().isUnauthorized()).andReturn();
+		this.mockMvc.perform(post("/products")).andExpect(status().isUnauthorized()).andReturn();
 	}
 
 	@Test
@@ -89,7 +88,7 @@ public class ProductsControllerTest {
 	public void authorisedADMINDELETE() throws Exception {
 
 		MvcResult mvcResult = this.mockMvc.perform(delete("/products").content(mapper.writeValueAsString(1000)).contentType(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.message").value("SUCCESS"))
+				.andExpect(status().isOk()).andExpect(jsonPath("$.message").value("SUCCESS"))
 				.andReturn();
 		Assertions.assertEquals(MediaType.APPLICATION_JSON_VALUE, mvcResult.getResponse().getContentType());
 	}
@@ -98,11 +97,11 @@ public class ProductsControllerTest {
 	@WithMockUser(username = "Swapnil", roles = "USER")
 	public void authorisedUSERDELETE() throws Exception {
 		this.mockMvc.perform(delete("/products").content(mapper.writeValueAsString(1000)).contentType(MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().is5xxServerError()).andReturn();
+				.andExpect(status().is5xxServerError()).andReturn();
 	}
 
 	@Test
 	public void unauthorisedDELETE() throws Exception {
-		this.mockMvc.perform(delete("/products").content(mapper.writeValueAsString(1000)).contentType(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isUnauthorized()).andReturn();
+		this.mockMvc.perform(delete("/products").content(mapper.writeValueAsString(1000)).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isUnauthorized()).andReturn();
 	}
 }

@@ -28,14 +28,14 @@ public class CurrencyControllerTest {
 	@Test
 	@WithMockUser(username = "Swapnil")
 	public void authorisedGET() throws Exception {
-		MvcResult mvcResult = this.mockMvc.perform(get("/currency")).andDo(print()).andExpect(status().isOk())
+		MvcResult mvcResult = this.mockMvc.perform(get("/currency")).andExpect(status().isOk())
 				.andExpect(jsonPath("$.message").value("SUCCESS")).andReturn();
 		Assertions.assertEquals(MediaType.APPLICATION_JSON_VALUE, mvcResult.getResponse().getContentType());
 	}
 
 	@Test
 	public void unauthorisedGET() throws Exception {
-		this.mockMvc.perform(get("/currency")).andDo(print())
+		this.mockMvc.perform(get("/currency"))
 				.andExpect(status().isUnauthorized()).andReturn();
 	}
 }

@@ -27,12 +27,12 @@ public class TermsAndConditionTest {
 	@Test
 	@WithMockUser(username = "Swapnil")
 	public void authorisedGET() throws Exception {
-		MvcResult mvcResult = this.mockMvc.perform(get("/termsandcondition/1000")).andDo(print()).andExpect(status().isOk()).andReturn();
+		MvcResult mvcResult = this.mockMvc.perform(get("/termsandcondition/1000")).andExpect(status().isOk()).andReturn();
 		Assertions.assertEquals(MediaType.APPLICATION_OCTET_STREAM_VALUE, mvcResult.getResponse().getContentType());
 	}
 
 	@Test
 	public void unauthorisedGET() throws Exception {
-		this.mockMvc.perform(get("/termsandcondition/1000")).andDo(print()).andExpect(status().isUnauthorized()).andReturn();
+		this.mockMvc.perform(get("/termsandcondition/1000")).andExpect(status().isUnauthorized()).andReturn();
 	}
 }
