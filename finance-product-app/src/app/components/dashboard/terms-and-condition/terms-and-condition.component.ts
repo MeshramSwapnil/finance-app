@@ -14,7 +14,7 @@ export class TermsAndConditionComponent implements OnInit{
   constructor(private productService : ProductsService, private router : Router, private fb : FormBuilder){}
   products : Products[] = [];
   tncForm = this.fb.group({
-    checkboxes: new FormArray([])
+    checkboxes: this.fb.array([])
   })
 
   get checkboxes() : FormArray {
@@ -25,11 +25,12 @@ export class TermsAndConditionComponent implements OnInit{
     if(this.productService.getSelectedProducts().length == 0) {
       alert('No Products Selected')
       this.router.navigateByUrl('/dashboard');
+      return;
     }
     this.products = this.productService.getSelectedProducts();
-    this.products.forEach(item => {
-      this.checkboxes.push(new FormControl(false));
-    });
+    for(let i=0; i < this.products.length; i++){
+      this.checkboxes.push(new FormControl(false, Validators.requiredTrue));
+    }
   }
 
   downloadTnc(id : number){
@@ -44,7 +45,6 @@ export class TermsAndConditionComponent implements OnInit{
 
   submitForm(){
     console.log(this.tncForm.value);
-
   }
 
 }

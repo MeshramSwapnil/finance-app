@@ -10,7 +10,7 @@
         <a class="button btn-transparent link" (click)="downloadTnc(products[i].id)">here</a>
       </div>
     </form>
-    <button class="align-self-end" (click)="submitForm()">Sumbit</button>
+    <button class="align-self-end" (click)="submitForm()" [disabled]="tncForm.invalid">Sumbit</button>
   </div>
 
 </div>

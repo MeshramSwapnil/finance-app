@@ -41,7 +41,6 @@ describe('LoginComponent', () => {
 
   it('should create login form', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    console.log(compiled);
     expect(compiled.getElementsByTagName('input#username')).toBeTruthy();
     expect(compiled.getElementsByTagName('input#password')).toBeTruthy();
     expect(compiled.getElementsByTagName('button[type=submit]')).toBeTruthy();
