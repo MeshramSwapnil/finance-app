@@ -1,5 +1,7 @@
 package com.minifinance.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.minifinance.constants.Constants;
 import com.minifinance.model.ApiResponse;
@@ -31,7 +34,9 @@ public class ProductsController {
 	
 	@GetMapping
 	public ApiResponse products(){
-		return ApiResponse.builder().data(productService.products()).message(Constants.SUCCESS).build();
+		List<Products> products = productService.products();
+		products.forEach(val -> val.setImageUrl(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString().concat(Constants.URL_SEPARATOR).concat(val.getImageUrl())));
+		return ApiResponse.builder().data(products).message(Constants.SUCCESS).build();
 	}
 	
 	@PostMapping

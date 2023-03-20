@@ -32,7 +32,6 @@ public class ProductService {
 	
 	public List<Products> products(){
 		List<Products> findAll = repo.findAll();
-		findAll.forEach(val -> val.setImageUrl(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString().concat(Constants.URL_SEPARATOR).concat(val.getImageUrl())));
 		return findAll;
 	}
 	
