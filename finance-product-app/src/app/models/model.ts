@@ -44,4 +44,5 @@ export interface Summary{
   description? : string;
   total : number;
   quantity : number;
+  isCheckBook? : boolean;
 }

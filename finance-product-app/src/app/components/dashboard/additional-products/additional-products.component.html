@@ -43,6 +43,11 @@
         <div class="summary-block">
           <h2 class="summary-header">Summary</h2>
           <div class="white-divider"></div>
+          <div class="flex justify-content-between pl-2 pr-2 mt-5 summary-data" *ngFor="let s of psummary">
+            <span>{{s.quantity}}</span>
+            <span>{{s.description}}</span>
+            <span>{{s.total}}</span>
+        </div>
           <div class="flex justify-content-between pl-2 pr-2 mt-5 summary-data" *ngFor="let s of summary">
               <span>{{s.quantity}}</span>
               <span>{{s.description}}</span>

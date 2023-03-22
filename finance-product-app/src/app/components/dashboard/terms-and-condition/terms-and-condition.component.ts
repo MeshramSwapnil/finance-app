@@ -44,7 +44,8 @@ export class TermsAndConditionComponent implements OnInit{
   }
 
   submitForm(){
-    console.log(this.tncForm.value);
+    alert('Form Submitted Successfully')
+    this.router.navigateByUrl('/dashboard');
   }
 
 }
